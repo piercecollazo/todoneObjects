@@ -106,7 +106,8 @@ function toggleDone(event) {
     // ways to do this, and I'm sure you'll figure one out!
 
 
-    // *IF* it's not "done" yet, apply strikethrough. Otherwise, take it away!
+    // *IF* it's not done yet, apply strikethrough. Otherwise, take that
+    // strikethrough away!
 
 
     // Toggle the "done-ness" of the same todo, using the isDone array.
