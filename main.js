@@ -75,7 +75,7 @@ function clearAllTodos(event) {
 
 function clearDoneTodos(event) {
     // Stop page from reloading on button click.
-
+    event.preventDefault();
     /*
         Find which todos need to be removed and remove them from BOTH arrays.
         If you did it right when making them, you should be able to check the
@@ -86,7 +86,12 @@ function clearDoneTodos(event) {
         One way to do this is to build up a new array. Give that a try first!
 
     */
-
+    for(let i = 0; i < todos.length; i++){
+        if(isDone[i] = true){
+            todos.splice(i, 1);
+            isDone.splice(i, 1);
+        }
+    }
 
 
     /*
@@ -127,13 +132,16 @@ function toggleDone(event) {
 
 function removeAllChildrenOfOl() {
     // Grab the ol.
-
+    let list = document.querySelector('#todo-list')
 
     // Remove all its children.
     // The way I like to do that is to continue to remove children as long as
     // there are some to remove.
     // Look at the methods `.hasChildNodes` and `removeChild`.
     // There are other ways too, though. Feel free to poke around.
+    while(list.hasChildNodes){
+        list.removeChild(list.firstChild);
+    }
 
 }
 
