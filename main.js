@@ -30,25 +30,30 @@ function init() {
 
 function addTodo(event) {
     // Stop page from reloading on button click.
-
+    event.preventDefault();
 
     // Get new todo from the new todo input field.
-
+    const input = document.querySelector('#new-todo').nodeValue;
 
     // Clear the input field of all text.
-
+    resetInput();
 
     // Put the todo and its "done-ness" in their respective arrays.
-
+    todos.push(input);
+    isDone.push(false);
 
     // Create a new html element and put our new todo's text in there.
-
+    const newLine = document.createElement('li');
+    newLine.innerText = input;
+    newLine.className = 'todo-line'
     
     // Add an event listener on the newly created html element to launch
     // `toggleDone` when it's clicked.
-
+    document.getElementsByClassName('.todo-line')
+        .addEventListener('click', toggleDone);
 
     // Put our new element on the list part of our page!
+    document.querySelector('#todo-list').appendChild(newLine);
 
 }
 
@@ -127,4 +132,9 @@ function removeAllChildrenOfOl() {
     // Look at the methods `.hasChildNodes` and `removeChild`.
     // There are other ways too, though. Feel free to poke around.
 
+}
+
+function resetInput(){
+    let input = document.querySelector('#new-todo');
+    input = '';
 }
