@@ -60,10 +60,13 @@ function addTodo(event) {
 
 function clearAllTodos(event) {
     // Stop page from reloading on button click.
-
+    event.preventDefault();
     
     // Remove all todos from BOTH arrays.
-
+    for(let i = 0; i < todos.length; i++){
+        todos.pop();
+        isDone.pop();
+    }
     
     // Remove all todos from the html.
     // You'll have to write that function too, but we'll call it here:
