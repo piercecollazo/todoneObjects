@@ -106,6 +106,8 @@ function clearDoneTodos(event) {
 
         Your call.
     */
+    removeAllChildrenOfOl();
+    updateOL();
 
 
 }
@@ -145,6 +147,25 @@ function removeAllChildrenOfOl() {
 
 }
 
+// Updating the list after being cleared by certain functions to simplify removal of completed/specific todos
+function updateOL(){
+    const newLine = document.createElement('li');
+    let list = document.querySelector('#todo-list');
+
+    for(let i = 0; i < todos.length; i++){
+        newLine.innerText = todos[i];
+        if(isDone[i] === false){
+        newLine.className = 'todo-line';
+        } else{
+            newLine.className = 'complete-line'
+        }
+        list.appendChild(newLine);
+    }
+
+}
+
+
+// Resetting inputs
 function resetInput(){
     let input = document.querySelector('#new-todo');
     input = '';
