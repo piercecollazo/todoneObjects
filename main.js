@@ -114,8 +114,16 @@ function clearDoneTodos(event) {
 
         Your call.
     */
-    // removeAllChildrenOfOl();
-    updateOL();
+    removeAllChildrenOfOl();
+    
+    const list = document.querySelector('#todo-list');
+    for(let i = 0; i < todos.length; i++){
+        const newLine = document.createElement('li');
+        newLine.innerText = todos[i];
+        list.appendChild(newLine);
+
+    }
+    // updateOL();
 
 
 }
