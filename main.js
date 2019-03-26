@@ -165,33 +165,7 @@ function removeAllChildrenOfOl() {
     }
 }
 
-// Updating the list after being cleared by certain functions to simplify removal of completed/specific todos
-// function updateOL(){
-//     removeAllChildrenOfOl();
-//     const newLine = document.createElement('li');
-//     let list = document.querySelector('#todo-list');
-
-//     for(let i = 0; i < todos.length; i++){
-//         newLine.innerText = todos[i];
-//         if(isDone[i] === false){
-//             list.appendChild(newLine)
-//             newLine.className = 'todo-line';
-//             newLine.style.textDecoration = 'none';
-//             console.log('Todo added')
-//         } else if(isDone[i] === true){
-//             list.appendChild(newLine)
-//             newLine.className = 'complete-line';
-//             newLine.style.textDecoration = 'line-through';
-//             console.log('Complete added')
-//         }
-//         // list.appendChild(newLine);
-//     }
-
-// }
-
-
 // Resetting inputs
 function resetInput(){
-    let input = document.querySelector('#new-todo');
-    input = '';
+    document.querySelector('#new-todo').value = '';
 }
