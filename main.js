@@ -47,7 +47,7 @@ function addTodo(event) {
     // Create a new html element and put our new todo's text in there.
     const newLine = document.createElement('li');
     newLine.innerText = input.item;
-    newLine.className = 'todo-line'
+    // newLine.className = 'todo-line'
     
     // Add an event listener on the newly created html element to launch
     // `toggleDone` when it's clicked.
@@ -64,7 +64,7 @@ function clearAllTodos(event) {
     event.preventDefault();
     
     // Remove all todos from BOTH arrays.
-    for(let i = 0; i < todos.length; i++){
+    while(todos.length > 0){
         todos.pop();
     }
     
@@ -111,6 +111,7 @@ function clearDoneTodos(event) {
         const newLine = document.createElement('li');
         newLine.innerText = todos[i].item;
         list.appendChild(newLine);
+        newLine.addEventListener('click', toggleDone);
 
     }
 
