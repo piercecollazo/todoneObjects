@@ -6,10 +6,8 @@ and each index of your isDone.
 For example, isDone[3] would hold the "done-ness" information for todos[3].
 
 */
-
 let todos = [];
-let isDone = [];
-let completeRef = [];
+
 
 // When the html finishes loading, launch `init`.
 window.onload = init;
@@ -35,18 +33,20 @@ function addTodo(event) {
     event.preventDefault();
 
     // Get new todo from the new todo input field.
-    const input = document.querySelector('#new-todo').value;
+    let input = { 
+        item : document.querySelector('#new-todo').value,
+        isDone : false
+    }
 
     // Clear the input field of all text.
     resetInput();
 
     // Put the todo and its "done-ness" in their respective arrays.
     todos.push(input);
-    isDone.push(false);
 
     // Create a new html element and put our new todo's text in there.
     const newLine = document.createElement('li');
-    newLine.innerText = input;
+    newLine.innerText = input.item;
     newLine.className = 'todo-line'
     
     // Add an event listener on the newly created html element to launch
@@ -66,7 +66,6 @@ function clearAllTodos(event) {
     // Remove all todos from BOTH arrays.
     for(let i = 0; i < todos.length; i++){
         todos.pop();
-        isDone.pop();
     }
     
     // Remove all todos from the html.
@@ -87,21 +86,12 @@ function clearDoneTodos(event) {
         One way to do this is to build up a new array. Give that a try first!
 
     */
-    // for(let i = 0; i < todos.length; i++){
-    //     if(isDone[i] = true){
-    //         todos.splice(i, 1);
-    //         isDone.splice(i, 1);
-    //     }
-    // }
-
-    while(isDone.includes(true)){
-        isDone.splice(isDone.indexOf(true));
+    for(let i = 0; i < todos.length; i++){
+        if(todos[i].isDone === true){
+            todos.splice(i, 1);
+            i--
+        }
     }
-
-    for(let i = 0; i < completeRef.length; i++){
-        todos.splice(todos.indexOf(completeRef[i]), 1);
-    }
-
     /*
         Now remove the done todos from the html.
 
@@ -119,11 +109,10 @@ function clearDoneTodos(event) {
     const list = document.querySelector('#todo-list');
     for(let i = 0; i < todos.length; i++){
         const newLine = document.createElement('li');
-        newLine.innerText = todos[i];
+        newLine.innerText = todos[i].item;
         list.appendChild(newLine);
 
     }
-    // updateOL();
 
 
 }
@@ -139,20 +128,23 @@ function toggleDone(event) {
 
     // Find the index of the array that this todo resides in. There are a couple
     // ways to do this, and I'm sure you'll figure one out!
-    let index = todos.indexOf(lineText);
+    let index = -1;
+    for(let i = 0; i < todos.length; i++){
+        if(todos[i].item === lineText){
+            index = i;
+        }
+    }
 
     // *IF* it's not done yet, apply strikethrough. Otherwise, take that
     // strikethrough away!
 
 
     // Toggle the "done-ness" of the same todo, using the isDone array.
-    if(isDone[index] === true){
-        isDone[index] = false;
-        completeRef.splice(completeRef[todos[index]], 1)
+    if(todos[index].isDone === true){
+        todos[index].isDone = false;
         clickedLine.style.textDecoration = 'none';
-    } else if(isDone[index] === false){
-        isDone[index] = true;
-        completeRef.push(todos[index]);
+    } else if(todos[index].isDone === false){
+        todos[index].isDone = true;
         clickedLine.style.textDecoration = 'line-through';
     }
 
@@ -173,28 +165,28 @@ function removeAllChildrenOfOl() {
 }
 
 // Updating the list after being cleared by certain functions to simplify removal of completed/specific todos
-function updateOL(){
-    removeAllChildrenOfOl();
-    const newLine = document.createElement('li');
-    let list = document.querySelector('#todo-list');
+// function updateOL(){
+//     removeAllChildrenOfOl();
+//     const newLine = document.createElement('li');
+//     let list = document.querySelector('#todo-list');
 
-    for(let i = 0; i < todos.length; i++){
-        newLine.innerText = todos[i];
-        if(isDone[i] === false){
-            list.appendChild(newLine)
-            newLine.className = 'todo-line';
-            newLine.style.textDecoration = 'none';
-            console.log('Todo added')
-        } else if(isDone[i] === true){
-            list.appendChild(newLine)
-            newLine.className = 'complete-line';
-            newLine.style.textDecoration = 'line-through';
-            console.log('Complete added')
-        }
-        // list.appendChild(newLine);
-    }
+//     for(let i = 0; i < todos.length; i++){
+//         newLine.innerText = todos[i];
+//         if(isDone[i] === false){
+//             list.appendChild(newLine)
+//             newLine.className = 'todo-line';
+//             newLine.style.textDecoration = 'none';
+//             console.log('Todo added')
+//         } else if(isDone[i] === true){
+//             list.appendChild(newLine)
+//             newLine.className = 'complete-line';
+//             newLine.style.textDecoration = 'line-through';
+//             console.log('Complete added')
+//         }
+//         // list.appendChild(newLine);
+//     }
 
-}
+// }
 
 
 // Resetting inputs
